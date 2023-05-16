@@ -1,0 +1,248 @@
+* {	
+  font-family: "Play", sans-serif !important;
+}
+
+/* ################ BODY ################ */
+body {
+	background-color: #ededed;
+}
+
+p>label {
+  display: block;
+}
+
+legend {
+  background-color: #000;
+  color: #fff;
+  padding: 3px 6px;
+}
+
+#erreur {
+  color: red;
+}
+
+a, a:hover, a:focus{
+	text-decoration:none !important;
+}
+
+
+
+/* ################ LOGO HEADER ################ */
+.logo-title {
+	height:90px;
+	z-index:2;
+	margin-top:0px;
+}
+
+/* ################ NAV ################ */
+nav {
+	padding:0 !important;
+	background-color:white !important;
+}
+
+nav .container-fluid
+{
+	border-bottom:4px solid #76b380;
+}
+
+nav ul li a
+{
+    padding: 30px 25px 30px 25px !important;
+	font-size:30px;
+	color:white !important;
+}
+
+nav ul li a:hover
+{
+    padding: 30px 24px 30px 24px !important;
+    border-left:1px solid #76b380;
+    border-right:1px solid #76b380;
+}
+
+nav ul li a svg
+{
+	margin-top:-9px;
+}
+
+nav ul li a:hover svg
+{
+	fill: white;
+}
+
+/* ######## BUTTON DANS LA NAV ######### */
+nav ul li button
+{
+    padding: 30px 25px 30px 25px !important;
+	font-size:30px;
+	color:white !important;
+	background-color:white;
+	border:none;
+}
+nav ul li button svg
+{
+	margin-top:-9px;
+}
+
+nav ul li button:hover
+{
+    padding: 30px 24px 30px 24px !important;
+    border-left:1px solid #76b380;
+    border-right:1px solid #76b380;
+}
+
+nav ul li button:hover svg
+{
+	fill: white;
+}
+
+.navbar-new-border {
+	border:0.5px solid grey !important;
+	margin-right:10px;
+}
+
+.toggler-icon-new-color {
+	color:white !important;
+}
+
+.active-li {
+	background-color:#76b380 !important;
+	color:white !important;
+}
+
+/* button */
+
+.button-sizing {
+	font-size:25px;
+	margin-top:15px;
+}
+
+.button-margin-bottom {
+	margin-top:20px !important;
+	margin-bottom:50px !important;
+	width:95%;
+	margin:auto;
+}
+
+.button-100-margin {
+	margin-top:20px !important;
+	width:100% !important;
+}
+
+/* ################ after header ################ */
+.margin-after-header {
+	margin-top:130px;
+}
+
+/* ################ listing-article ################ */
+.listing-article {
+	width:90%;
+	margin:auto;
+	margin-top:130px;
+}
+
+/* ################ espace-search ################ */
+.espace-search {
+	margin-left:18px !important;
+}
+
+/* ################### CARD ################### */
+
+.card-text {
+  font-weight:500;
+}
+
+.card-body a {
+    margin-left: auto;
+}
+
+.card-body {
+    padding: 30px !important;
+}
+
+.margin-card {
+	margin:15px;
+}
+
+.margin-card-produit {
+	margin-top:15px;
+	margin-bottom:15px;
+}
+
+.card img {
+	max-width:200px;
+	height:200px;
+}
+
+.card-title {
+	color:black;
+}
+
+.card-text {
+	color:black;
+}
+
+/* ################### COULEUR  ################### */
+.green {
+	color:#76b380 !important;
+}
+
+.white {
+	color:white !important;
+}
+
+.background-green {
+	background-color:#76b380 !important;
+}
+
+.color-green {
+	color:grey !important;
+}
+.color-green:hover {
+	background-color:#76b380 !important;
+	color:white !important;
+}
+
+.black-bold {
+	font-weight:bold;
+}	
+
+.black-bold:hover {
+	color:#fade4b !important;
+}
+
+/* ################ LOGO SVG FONTAWESOME ################ */
+.svg-logo-a {
+	padding-right:10px;
+}
+
+.vertical-center {
+	width:100% !important;
+}
+
+.span-position-panier {
+	margin-left:-9px !important;
+	margin-top:-9px !important;
+	font-size:45% !important;
+}
+
+/* ################ MEDIA QUERY ################ */
+@media all and (max-width: 1250px)
+{
+	nav ul li a, nav ul li button
+	{
+		font-size:18px;
+	}
+	nav ul li a svg, nav ul li button svg
+	{
+		width:20px;
+		height:15px;
+	    margin-top:-5px;
+	}
+	li .dropdown-item {
+		text-align:center;
+	}
+	.connexion-sizing {
+		font-size:18px;
+		margin-left:-10px;
+	}
+}
