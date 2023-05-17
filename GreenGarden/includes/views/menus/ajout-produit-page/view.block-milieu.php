@@ -13,26 +13,31 @@ try {
     $conn = new PDO("mysql:host=$host;dbname=$dbname", $user, $password_db);
     // configuration pour afficher les erreurs pdo
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
+} 
+catch (PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Vérification si le formulaire a été soumis
     if (
-        isset($_POST['nom_court']) && isset($_POST['nom_long']) && isset($_POST['reference'])
+        isset($_POST['nom_court']) 
+		&& isset($_POST['nom_long']) 
+		&& isset($_POST['reference'])
         && isset($_POST['prix'])
-        && isset($_POST['tva']) && isset($_POST['categorie']) && isset($_FILES['photo'])
+        && isset($_POST['tva']) 
+		&& isset($_POST['categorie']) 
+		&& isset($_FILES['photo'])
     ) {
-        $noml_produit = $_POST['nom_long'];
-        $nomc_produit = $_POST['nom_court'];
-        $reference_produit = $_POST['reference'];
-        $prix_produit = $_POST['prix'];
-        $tva = $_POST['tva'];
+        $noml_produit = escape_string($_POST['nom_long']);
+        $nomc_produit = escape_string($_POST['nom_court']);
+        $reference_produit = escape_string($_POST['reference']);
+        $prix_produit = escape_string($_POST['prix']);
+        $tva = escape_string($_POST['tva']);
         $photo_produit = $_FILES['photo'];
 
         $stmt = $conn->prepare("SELECT * from t_d_categorie where Id_Categorie=:catego");
-        $stmt->bindValue(':catego', $_POST['categorie']);
+        $stmt->bindValue(':catego', escape_string($_POST['categorie']));
         $stmt->execute();
         $categorie = $stmt->fetch(PDO::FETCH_ASSOC);		
 
@@ -43,10 +48,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $stmt_count = $conn->prepare("SELECT COUNT(*) AS total from t_d_produit where Id_Fournisseur=:fourn AND Ref_fournisseur=:reference");
         $stmt_count->bindValue(':fourn', $_POST['fournisseur']);
-        $stmt_count->bindValue(':reference', $_POST['reference']);
+        $stmt_count->bindValue(':reference', escape_string($_POST['reference']));
         $stmt_count->execute();
         $count_item = $stmt_count->fetch(PDO::FETCH_ASSOC);
-
+		
+		//Si produit pas présent avec les param Id_fournisseur et Ref_Fournisseur
         if($count_item['total'] < 1){
             // Ajout du produit à la base de données
             try {
@@ -85,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 					mkdir("styles/images/produits/{$product_id}");
 				}
 				
-				//Upload de l'image
+				//Upload de l'image dans le dossier ciblé
 				if (upload_file($photo_produit, "styles/images/produits/{$product_id}/")) {	
 					echo "Le fichier est uploadé ";
 				} else {
@@ -102,9 +108,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 		}
 		else{
-					echo "Le produit (référence pour ce fournisseur) existe déjà !";
+			echo "Le produit (référence pour ce fournisseur) existe déjà !";
 		}
-    } else {
+    } 
+	else {
         header('Location: index.php');
         exit();
     }

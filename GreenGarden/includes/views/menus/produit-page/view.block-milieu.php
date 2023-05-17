@@ -48,7 +48,7 @@ if (isset($_GET['id'])) {
 						<h1>{$produit['Nom_court']}</h1>
 						<p>Catégorie: {$categorie['Libelle']}</p>
 						<p>Description: {$produit['Nom_Long']}</p>
-						<p>Prix HT: {$produit['Prix_Achat']}</p>
+						<p>Prix HT: <b>{$produit['Prix_Achat']} €</b></p>
 					</div>
 					<div class='col-lg-4 col-md-4 col-sm-4 col-xs-12 col-xs-B-12 d-flex align-items-center justify-content-center'>
 							<form method='GET'>

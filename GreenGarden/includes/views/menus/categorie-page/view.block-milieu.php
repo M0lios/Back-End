@@ -3,7 +3,7 @@
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-xs-B-12">
 	<div class="row">
 		<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12 col-xs-B-12'>
-			<h1>Catalogue</h1>
+			<h1><a href="ajout-categorie.php" class='btn btn-round btn-outline-dark'>Retour</a> / Catégories</h1>
 		</div>
 		<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12 col-xs-B-12'>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-xs-B-12">
@@ -32,7 +32,8 @@
 	</form>
 	<div class="row">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-xs-B-12">
-	<div class="row">	
+	<div class="row">
+	
 	<?php
 	
 	require 'includes/functions/functions.php';
@@ -49,7 +50,9 @@
     }
     if (isset($_POST['search'])) {
         $search_term = escape_string($_POST['search_term']);
-        $sql = "select * from t_d_produit WHERE nom_court like :search or nom_Long like :search";
+        $sql = "SELECT t1.Id_Categorie, t1.Libelle, t1.Id_Categorie_Parent, t2.Libelle AS Libelle_Parent 
+				FROM t_d_categorie AS t1 LEFT JOIN t_d_categorie AS t2 ON t1.Id_Categorie_Parent = t2.Id_Categorie 
+				WHERE t1.Libelle like :search OR t2.Libelle like :search";
 
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(':search', '%' . $search_term . '%');
@@ -58,81 +61,84 @@
 			echo "
 			<div class='row'>
 				<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12 col-xs-B-12'>
-					<br><p class='espace-search'>{$stmt->rowCount()} produit(s) trouvé !</p>
+					<br><p class='espace-search'>{$stmt->rowCount()} catégorie(s) trouvé !</p>
 				</div>
 			</div>
 			";
-            while ($row = $stmt->fetch()) {				
-				if ($stmt->rowCount() == 1) {
-					echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12 col-xs-B-12 justify-content-center'>";
-				}
-				elseif ($stmt->rowCount() == 2) {
-					echo "<div class='col-lg-6 col-md-6 col-sm-6 col-xs-12 col-xs-B-12 justify-content-center'>";
-				}
-				else{
-					echo "<div class='col-lg-4 col-md-4 col-sm-6 col-xs-12 col-xs-B-12 justify-content-center'>";
-				}
-				echo "<a href='produit.php?id={$row['Id_Produit']}'>";
-				echo "<div class='card margin-card'>
-				        <div class='d-flex align-items-center justify-content-center'>
-						<img src='styles/images/produits/{$row['Id_Produit']}/{$row['Photo']}' class='img-fluid rounded-start' alt='{$row['Photo']}'>
-						</div>
-						<div class='card-body'>
-							<h5 class='card-title'>{$row['Nom_court']}</h5>
-							<p class='card-text'>{$row['Nom_Long']}</p>
-							<p class='card-text'>Prix HT : <b>{$row['Prix_Achat']} €</b></p>
-							<a href='produit.php?id={$row['Id_Produit']}' class='btn btn-round btn-outline-success button-100-margin'>Voir le produit</a>
-						</div>
-					</div>";				
-				echo "</a>";
-				echo "</div>";
+			echo "
+				<div class='table-responsive'>
+					<table class='table table-success table-striped table-hover'>
+						<thead class='table-dark'>
+							<tr>
+								<th scope='col'>#</th>
+								<th scope='col'>Libellé</th>
+								<th scope='col'>Parent</th>
+							</tr>
+						</thead>
+						<tbody>
+			";
+            while ($row = $stmt->fetch()) {
+				echo "
+							<tr>
+								<th scope='row'>{$row['Id_Categorie']}</th>
+								<td>{$row['Libelle']}</td>
+								<td>{$row['Libelle_Parent']}</td>
+							</tr>
+				";
             }
+			echo "
+						</tbody>
+					</table>
+				</div>
+			";			
 			echo "<button class='btn btn-round btn-danger button-margin-bottom'>Plus aucun résultat !</button>";
         }
 		else{
-			echo "<button class='btn btn-round btn-danger button-margin-bottom'>Aucun produit trouvé !</button>";
+			echo "<button class='btn btn-round btn-danger button-margin-bottom'>Aucune catégorie trouvé !</button>";
 		}
     } else {
-        $sql = "select * from t_d_produit";
+        $sql = "SELECT t1.Id_Categorie, t1.Libelle, t1.Id_Categorie_Parent, t2.Libelle AS Libelle_Parent 
+				FROM t_d_categorie AS t1 LEFT JOIN t_d_categorie AS t2 ON t1.Id_Categorie_Parent = t2.Id_Categorie";
         $stmt = $conn->query($sql);
 
         if ($stmt->rowCount() > 0) {
 			echo "
 			<div class='row'>
 				<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12 col-xs-B-12'>
-					<br><p class='espace-search'>{$stmt->rowCount()} produit(s) trouvé !</p>
+					<br><p class='espace-search'>{$stmt->rowCount()} catégorie(s) trouvé !</p>
 				</div>
 			</div>
 			";
+			echo "
+				<div class='table-responsive'>
+					<table class='table table-success table-striped table-hover'>
+						<thead class='table-dark'>
+							<tr>
+								<th scope='col'>#</th>
+								<th scope='col'>Libellé</th>
+								<th scope='col'>Parent</th>
+							</tr>
+						</thead>
+						<tbody>
+			";
             while ($row = $stmt->fetch()) {				
-				if ($stmt->rowCount() == 1) {
-					echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12 col-xs-B-12 justify-content-center'>";
-				}
-				elseif ($stmt->rowCount() == 2) {
-					echo "<div class='col-lg-6 col-md-6 col-sm-6 col-xs-12 col-xs-B-12 justify-content-center'>";
-				}
-				else{
-					echo "<div class='col-lg-4 col-md-4 col-sm-6 col-xs-12 col-xs-B-12 justify-content-center'>";
-				}
-				echo "<a href='produit.php?id={$row['Id_Produit']}'>";
-				echo "<div class='card margin-card'>
-				        <div class='d-flex align-items-center justify-content-center'>
-						<img src='styles/images/produits/{$row['Id_Produit']}/{$row['Photo']}' class='img-fluid rounded-start' alt='{$row['Photo']}'>
-						</div>
-						<div class='card-body'>
-							<h5 class='card-title'>{$row['Nom_court']}</h5>
-							<p class='card-text'>{$row['Nom_Long']}</p>
-							<p class='card-text'>Prix HT : <b>{$row['Prix_Achat']} €</b></p>
-							<a href='produit.php?id={$row['Id_Produit']}' class='btn btn-round btn-outline-success button-100-margin'>Voir le produit</a>
-						</div>
-					</div>";				
-				echo "</a>";
-				echo "</div>";
+				echo "
+							<tr>
+								<th scope='row'>{$row['Id_Categorie']}</th>
+								<td>{$row['Libelle']}</td>
+								<td>{$row['Libelle_Parent']}</td>
+							</tr>
+				";
             }
+			echo "
+						</tbody>
+					</table>
+				</div>
+			";	
 			echo "<button class='btn btn-round btn-danger button-margin-bottom'>Plus aucun résultat !</button>";
         }
 		else{
-			echo "<button class='btn btn-round btn-danger button-margin-bottom'>Aucun produit trouvé !</button>";
+			echo "<button class='btn btn-round btn-danger button-margin-bottom'>Aucune catégorie trouvé !</button>";
 		}
     }
 	?>

@@ -28,7 +28,11 @@
     <a class="text-reset fw-bold" href="#">Damien Cauët</a>
   </div>
 </footer>
+<script src="styles/js/jquery.js"></script>
 <script src="styles/js/bootstrap.js"></script>
 <script src="styles/js/back.js"></script>
+<?php if($page == "ajout-categorie"): ?>
+<script src="styles/js/ajout-categorie/ajout-categorie.js"></script>
+<?php endif; ?>
 </body>
 </html>

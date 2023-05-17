@@ -40,6 +40,22 @@
           <a class="nav-link color-green" href="ajout-produit.php">Ajout-Product</a>
 		<?php endif; ?>
         </li>
+		<?php if($page == "ajout-fournisseur" || $page == "fournisseur"): ?>
+        <li class="nav-item active-li">
+          <a class="nav-link color-green" href="#">Ajout-Fournisseur</a>
+		<?php else: ?>
+        <li class="nav-item">
+          <a class="nav-link color-green" href="ajout-fournisseur.php">Ajout-Fournisseur</a>
+		<?php endif; ?>
+        </li>
+		<?php if($page == "ajout-categorie" || $page == "categorie"): ?>
+        <li class="nav-item active-li">
+          <a class="nav-link color-green" href="#">Ajout-Categorie</a>
+		<?php else: ?>
+        <li class="nav-item">
+          <a class="nav-link color-green" href="ajout-categorie.php">Ajout-Categorie</a>
+		<?php endif; ?>
+        </li>
       </ul>
 	  <?php if($page != "connexion"): ?>
       <ul class="d-flex">
