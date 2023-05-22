@@ -1,3 +1,15 @@
+<?php
+// Démarrage de la session
+session_start();
+//Si je veux me déco
+if(isset($_GET['logout']) == true):
+    session_unset();
+	session_destroy();
+	header('Location: index.php');
+    exit();
+endif;
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -12,6 +24,7 @@
     <link rel="stylesheet" href="styles/css/bootstrap.css" />
     <link rel="stylesheet" href="styles/css/all.css" />
     <link rel="stylesheet" href="styles/css/<?php echo $page; ?>.css" />
+    <script src="styles/js/add_panier.js"></script>
     <title>GreenGarden</title>
 </head>
 <body>

@@ -1,3 +1,5 @@
+<?php if (isset($_SESSION['user_type']) > 1 ): ?>
+
 <div class="listing-article">
 <?php
 
@@ -202,3 +204,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	</div>
 </div>
 </div>
+
+<?php
+else:
+	header('Location: index.php');
+    exit();
+endif;
+?>
