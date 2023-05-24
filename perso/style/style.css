@@ -1,0 +1,79 @@
+body{
+    background-color: rgb(20, 150, 107);
+    font-family: 'Pacifico', cursive;
+}
+
+.nav-link {
+font-size: 2em;
+}
+
+.promo{
+    text-align: center;
+}
+
+.ImgProduit{
+
+    width: 20%;
+
+}
+
+
+.header{
+    align-content: center;
+}
+
+.btn{
+    align-content: center;
+    color:white;
+}
+
+form{
+    text-align:center;
+    margin-top: 50px;
+}
+
+h1{
+    text-align: center;
+    font-size: 4em;
+}
+
+h2{
+    
+}
+
+.vedette{
+
+    width: 30%;
+}
+
+
+.CardProduit{
+    /* marge intérieure */
+    margin: 20px;
+    /* marge extérieure */
+    padding: 0;
+    /* affichage block */
+    display: flex;
+    /* déplacement block */
+    flex-flow: row wrap;
+    /* déplacement horizontal */
+    justify-content: space-between;
+    /* déplacement vertical */
+    align-items: center;
+    /* soulignement */
+    text-decoration: none;
+}
+
+.Ajouter {
+    /* marge intérieure */
+    margin: 50px;
+    /* marge extérieure */
+    padding: 5px;
+}
+
+.TextProduit{
+    color:white;
+    font-size: 30px;
+}
+
+

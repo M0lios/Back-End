@@ -17,7 +17,7 @@
           <a class="nav-link color-green" href="index.php">Accueil</a>
 		<?php endif; ?>
         </li>
-		<?php if($page == "catalogue"): ?>
+		<?php if($page == "catalogue" || $page == "produit"): ?>
         <li class="nav-item active-li">
           <a class="nav-link color-green" href="#">Catalogue</a>
 		<?php else: ?>
@@ -47,30 +47,41 @@ if (isset($_SESSION['panier'])) {
       <span class="position-absolute badge rounded-pill bg-danger span-position-panier" id="bn_item_basket" value="<?php echo $nb_type_prod; ?>"><?php echo $nb_type_prod; ?></span>
 </a>
         </li>
-    <?php if (isset($_SESSION['user_type']) > 1 ): ?>
+    <?php if (isset($_SESSION['user_type']) && $_SESSION['user_type'] > 1): ?>
+	<?php if($page == "ajout-produit" || $page == "ajout-fournisseur" || $page == "fournisseur" || $page == "ajout-categorie" || $page == "categorie"): ?>
+	<li class="nav-item active-li dropdown">
+	<?php else: ?>
+	<li class="nav-item dropdown">
+	<?php endif; ?>
+          <a class="nav-link color-green dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Ajout
+          </a>
+		<ul class="dropdown-menu background-black border-yellow">
 		<?php if($page == "ajout-produit"): ?>
-        <li class="nav-item active-li">
-          <a class="nav-link color-green" href="#">Ajout-Product</a>
+        <li class="active-li">
+          <a class="dropdown-item color-green" href="#">Produit</a>
 		<?php else: ?>
-        <li class="nav-item">
-          <a class="nav-link color-green" href="ajout-produit.php">Ajout-Product</a>
+        <li>
+          <a class="dropdown-item color-green" href="ajout-produit.php">Produit</a>
 		<?php endif; ?>
         </li>
 		<?php if($page == "ajout-fournisseur" || $page == "fournisseur"): ?>
-        <li class="nav-item active-li">
-          <a class="nav-link color-green" href="#">Ajout-Fournisseur</a>
+        <li class="active-li">
+          <a class="dropdown-item color-green" href="#">Fournisseur</a>
 		<?php else: ?>
-        <li class="nav-item">
-          <a class="nav-link color-green" href="ajout-fournisseur.php">Ajout-Fournisseur</a>
+        <li>
+          <a class="dropdown-item color-green" href="ajout-fournisseur.php">Fournisseur</a>
 		<?php endif; ?>
         </li>
 		<?php if($page == "ajout-categorie" || $page == "categorie"): ?>
-        <li class="nav-item active-li">
-          <a class="nav-link color-green" href="#">Ajout-Categorie</a>
+        <li class="active-li">
+          <a class="dropdown-item color-green" href="#">Catégorie</a>
 		<?php else: ?>
-        <li class="nav-item">
-          <a class="nav-link color-green" href="ajout-categorie.php">Ajout-Categorie</a>
+        <li>
+          <a class="dropdown-item color-green" href="ajout-categorie.php">Catégorie</a>
 		<?php endif; ?>
+        </li>
+	          </ul>
         </li>
     <?php endif; ?>
       </ul>

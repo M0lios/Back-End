@@ -1,6 +1,13 @@
 <?php
 // Démarrage de la session
 session_start();
+
+if($page != "produit"){
+    $_SESSION['surf_id_product'] = 0;
+    $_SESSION['surf_return_id_product'] = 0;
+}
+
+
 //Si je veux me déco
 if(isset($_GET['logout']) == true):
     session_unset();
@@ -24,7 +31,6 @@ endif;
     <link rel="stylesheet" href="styles/css/bootstrap.css" />
     <link rel="stylesheet" href="styles/css/all.css" />
     <link rel="stylesheet" href="styles/css/<?php echo $page; ?>.css" />
-    <script src="styles/js/add_panier.js"></script>
     <title>GreenGarden</title>
 </head>
 <body>

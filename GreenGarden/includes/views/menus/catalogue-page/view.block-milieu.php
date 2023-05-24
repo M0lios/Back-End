@@ -36,8 +36,9 @@
 	<?php
 	
 	require 'includes/functions/functions.php';
+	require 'includes/class/produit.php';
 	
-    $host = "localhost";
+    /*$host = "localhost";
     $user = "root";
     $pwd = "";
     $dbname = "greengarden";
@@ -46,27 +47,41 @@
         $conn = new PDO("mysql:host=$host;dbname=$dbname", $user, $pwd);
     } catch (PDOException $e) {
         echo "Connection failed " . $e->getMessage();
-    }
+    }*/
+
     if (isset($_POST['search'])) {
         $search_term = escape_string($_POST['search_term']);
         $sql = "select * from t_d_produit WHERE nom_court like :search or nom_Long like :search";
 
-        $stmt = $conn->prepare($sql);
-        $stmt->bindValue(':search', '%' . $search_term . '%');
-        $stmt->execute();
-        if ($stmt->rowCount() > 0) {
+        //$stmt = $conn->prepare($sql);
+        //$stmt->bindValue(':search', '%' . $search_term . '%');
+        //$stmt->execute();
+		
+        $p = new Produit();
+        $produit = $p->getProductsByName( '%' . $search_term . '%');		
+        $total_product = count($produit);
+		
+		if($total_product > 1){
+			$produit_text = "produits";
+		}else{
+			$produit_text = "produit";
+		}
+		
+     // if ($stmt->rowCount() > 0) {
+        if ($total_product > 0) {
 			echo "
 			<div class='row'>
 				<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12 col-xs-B-12'>
-					<br><p class='espace-search'>{$stmt->rowCount()} produit(s) trouvé !</p>
+					<br><p class='espace-search'>{$total_product} {$produit_text} trouvé !</p>
 				</div>
 			</div>
 			";
-            while ($row = $stmt->fetch()) {				
-				if ($stmt->rowCount() == 1) {
+           // while ($row = $stmt->fetch()) {
+			foreach ($produit as $row) {			
+				if ($total_product == 1) {
 					echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12 col-xs-B-12 justify-content-center'>";
 				}
-				elseif ($stmt->rowCount() == 2) {
+				elseif ($total_product == 2) {
 					echo "<div class='col-lg-6 col-md-6 col-sm-6 col-xs-12 col-xs-B-12 justify-content-center'>";
 				}
 				else{
@@ -93,22 +108,35 @@
 			echo "<button class='btn btn-round btn-danger button-margin-bottom'>Aucun produit trouvé !</button>";
 		}
     } else {
-        $sql = "select * from t_d_produit";
-        $stmt = $conn->query($sql);
+        //$sql = "select * from t_d_produit";
+        //$stmt = $conn->query($sql);
+		
+		$p = new Produit();
+        $produit = $p->getAllProduits();
+        $total_product = count($produit);
+		
+		if($total_product > 1){
+			$produit_text = "produits";
+		}else{
+			$produit_text = "produit";
+		}
 
-        if ($stmt->rowCount() > 0) {
+     // if ($stmt->rowCount() > 0) {
+        if ($total_product > 0) {
 			echo "
 			<div class='row'>
 				<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12 col-xs-B-12'>
-					<br><p class='espace-search'>{$stmt->rowCount()} produit(s) trouvé !</p>
+					<br><p class='espace-search'>{$total_product} {$produit_text} trouvé !</p>
 				</div>
 			</div>
 			";
-            while ($row = $stmt->fetch()) {				
-				if ($stmt->rowCount() == 1) {
+			
+           // while ($row = $stmt->fetch()) {
+			foreach ($produit as $row) {
+				if ($total_product == 1) {
 					echo "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12 col-xs-B-12 justify-content-center'>";
 				}
-				elseif ($stmt->rowCount() == 2) {
+				elseif($total_product == 2) {
 					echo "<div class='col-lg-6 col-md-6 col-sm-6 col-xs-12 col-xs-B-12 justify-content-center'>";
 				}
 				else{

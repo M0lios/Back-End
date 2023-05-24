@@ -25,6 +25,15 @@ class Produit
         return $this->dao->select("t_d_produit","",$params,"Nom_court");
     }
 
+    public function getProductsByName($name)
+    {
+        $params = array(
+            ':search' => $name, ':search2' => $name
+        );
+        return $this->dao->select('t_d_produit', 'Nom_court like :search 
+    or Nom_Long like :search2', $params, 'Nom_court');
+    }
+
     public function insertProduit(
         $tauxtva,
         $nomlong,

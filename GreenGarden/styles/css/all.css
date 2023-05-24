@@ -225,6 +225,19 @@ nav ul li button:hover svg
 	font-size:45% !important;
 }
 
+input:invalid {
+  box-shadow: 0 0 5px 1px red;
+}
+
+input:focus:invalid {
+  outline: none;
+}
+
+.padding-div-alert {
+	margin-top:2px !important;
+	margin-bottom:0px !important;
+}
+
 /* ################ MEDIA QUERY ################ */
 @media all and (max-width: 1250px)
 {

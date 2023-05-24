@@ -31,8 +31,18 @@
 <script src="styles/js/jquery.js"></script>
 <script src="styles/js/bootstrap.js"></script>
 <script src="styles/js/back.js"></script>
+
 <?php if($page == "ajout-categorie"): ?>
 <script src="styles/js/ajout-categorie/ajout-categorie.js"></script>
+<?php endif; ?>
+<?php if($page == "inscription"): ?>
+<script src="styles/js/inscription/page_inscrip.js"></script>
+<?php endif; ?>
+<?php if($page == "produit"): ?>
+<script src="styles/js/add_panier.js"></script>
+<?php endif; ?>
+<?php if($page == "panier"): ?>
+<script src="styles/js/up_panier.js"></script>
 <?php endif; ?>
 </body>
 </html>

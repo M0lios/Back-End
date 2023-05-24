@@ -1,4 +1,4 @@
-<?php if (isset($_SESSION['user_type']) > 1 ): ?>
+<?php if (isset($_SESSION['user_type']) && $_SESSION['user_type'] > 1): ?>
 
 <div class="listing-article">
 <?php

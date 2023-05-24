@@ -1,4 +1,5 @@
 <?php
+
 class dao
 {
 
@@ -21,7 +22,8 @@ class dao
             } else {
                 $this->user_type = "";
             }
-            switch ($this->user_type) {
+            //enlevée pour éviter mettre les droits d'utilisateur
+           /* switch ($this->user_type) {
                 case 'admin':
 
                     $this->db_user = 'admin';
@@ -47,8 +49,11 @@ class dao
                     $this->db_user = 'root';
                     $this->db_password = '';
                     break;
-            }
-        } else {
+            }*/
+            $this->db_user = 'root';
+            $this->db_password = '';
+        } 
+        else {
             $this->db_user = 'root';
             $this->db_password = '';
         }

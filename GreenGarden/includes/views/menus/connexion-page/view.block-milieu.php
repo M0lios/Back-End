@@ -1,9 +1,12 @@
+<div class="listing-article">
 <?php
 
 if (isset($_SESSION['user_id'])) {
     header('Location: index.php');
     exit();
 }
+
+$login = null;
 
 // Traitement de la soumission du formulaire d'inscription
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {	
@@ -30,9 +33,14 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 if ($user && password_verify($password, $user['Password'])) {
     $_SESSION['user_id'] = $user['Id_User'];
     //pour récupérer le user type faire une requete sur la table t_d_usertype
-    $_SESSION['user_type'] = $user['Id_UserType'];
+    $_SESSION['user_type'] = $user['Id_UserType'];    
+		$_SESSION['surf_id_product'] = 0;
+    $_SESSION['surf_return_id_product'] = 0;
+    $_SESSION['logged_in'] = true;
     header('Location: index.php');
     exit();
+}else{
+  echo "<div class='alert alert-danger' role='alert'>Login ou Mot de passe invalide !</div>";
 }
 
 
@@ -42,16 +50,9 @@ if ($user && password_verify($password, $user['Password'])) {
 
 ?>
 
-<section>
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col col-xl-10">
-        <div class="card">
+        <div class="card margin-card-produit">
           <div class="row g-0">
-            <div class="col-md-6 col-lg-5 d-none d-md-block">
-              <img src="styles/images/logo/gg.jpg" alt="login form" class="img-fluid"/>
-            </div>
-            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+            <div class="col-md-12 col-lg-12 d-flex align-items-center">
               <div class="card-body p-4 p-lg-5 text-black">
 
                 <form method="POST">
@@ -60,10 +61,12 @@ if ($user && password_verify($password, $user['Password'])) {
                     <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
                     <span class="h1 fw-bold mb-0"><h1>Se connecter</h1></span>
                   </div>
+				  <small><font color="red">*</font> Ces zones sont obligatoires pour envoyer le formulaire.</small>
+				<br><br>
 
                   <div class="form-outline mb-4">
                     <label class="form-label" for="login">Votre Login :</label>
-                    <input class="form-control form-control-lg" type="login" id="login" name="login" required />
+                    <input class="form-control form-control-lg" type="login" id="login" name="login" value="<?php echo $login; ?>" required />
                   </div>
 
                   <div class="form-outline mb-4">
@@ -81,7 +84,4 @@ if ($user && password_verify($password, $user['Password'])) {
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+</div>
