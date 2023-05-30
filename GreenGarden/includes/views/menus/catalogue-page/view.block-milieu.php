@@ -98,7 +98,7 @@
 							<p class='card-text'>Prix HT : <b>{$row['Prix_Achat']} €</b></p>
 							<a href='produit.php?id={$row['Id_Produit']}' class='btn btn-round btn-outline-success button-100-margin'>Voir le produit</a>
 						</div>
-					</div>";				
+					</div>";
 				echo "</a>";
 				echo "</div>";
             }

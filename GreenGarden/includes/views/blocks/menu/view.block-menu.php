@@ -47,6 +47,14 @@ if (isset($_SESSION['panier'])) {
       <span class="position-absolute badge rounded-pill bg-danger span-position-panier" id="bn_item_basket" value="<?php echo $nb_type_prod; ?>"><?php echo $nb_type_prod; ?></span>
 </a>
         </li>
+		<?php if($page == "commande" || $page == "commande_inf"): ?>
+        <li class="nav-item active-li">
+          <a class="nav-link color-green" href="#">Mes commandes</a>
+		<?php else: ?>
+        <li class="nav-item">
+          <a class="nav-link color-green" href="commande.php">Mes commandes</a>
+		<?php endif; ?>
+        </li>
     <?php if (isset($_SESSION['user_type']) && $_SESSION['user_type'] > 1): ?>
 	<?php if($page == "ajout-produit" || $page == "ajout-fournisseur" || $page == "fournisseur" || $page == "ajout-categorie" || $page == "categorie"): ?>
 	<li class="nav-item active-li dropdown">

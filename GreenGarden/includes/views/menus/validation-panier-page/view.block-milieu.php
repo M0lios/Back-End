@@ -114,8 +114,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->execute();
     $deliv_id = $pdo->lastInsertId();
 
-    $stmt = $pdo->prepare("INSERT INTO t_d_adressecommande
-     (Id_Commande, Id_Adresse, Id_Type) VALUES ( $order_id , $deliv_id, 1)");
+    $stmt = $pdo->prepare("INSERT INTO t_d_adressecommande (
+	Id_Commande, 
+	Id_Adresse, 
+	Id_Type
+	) VALUES (
+	$order_id,
+	$deliv_id,
+	1
+	)");
     $stmt->execute();
 
 
@@ -137,8 +144,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->execute();
     $bill_id = $pdo->lastInsertId();
 
-    $stmt = $pdo->prepare("INSERT INTO t_d_adressecommande
-     (Id_Commande, Id_Adresse, Id_Type) VALUES ($order_id, $bill_id, 2)");
+    $stmt = $pdo->prepare("INSERT INTO t_d_adressecommande (
+	Id_Commande, 
+	Id_Adresse, 
+	Id_Type
+	) VALUES (
+	$order_id, 
+	$bill_id, 
+	2
+	)");
     $stmt->execute();
 
     // récupérer le contenu du panier de l'utilisateur (pour ça on recup la variable de session cart)
@@ -152,10 +166,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $subtotal = $quantity * $product['Prix_Achat'];
         $total += $subtotal;
         echo $product['Nom_Long'] . " x " . $quantity . " = " . $subtotal . " €<br>";
+		
+		$taux_tva = $product['Taux_TVA'];
+		$prix_achat = $product['Prix_Achat'];
 
-        $stmt = $pdo->prepare("INSERT INTO t_d_lignecommande
-     (Id_Commande, Id_Produit, Id_Expedition, Quantite) 
-     VALUES (  $order_id ,$id, $exp_id,$quantity)");
+        $stmt = $pdo->prepare("INSERT INTO t_d_lignecommande (
+		Id_Commande, 
+		Id_Produit, 
+		Id_Expedition, 
+		Quantite, 
+		Taux_TVA, 
+		Prix_Achat
+		) VALUES (
+		$order_id,
+		$id, 
+		$exp_id,
+		$quantity,
+		$taux_tva,
+		$prix_achat
+		)");
         $stmt->execute();
     }
     echo "<br>Total HT: " . $total . " €<br>";

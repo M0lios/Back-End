@@ -21,6 +21,7 @@ if (isset($_SESSION['user_id'])) {
 
     <p> Coucou <?php echo $user['Login'] ?> </p>
     <p> Coucou <?php echo $_SESSION['user_type']; ?> </p>
+    <p> Coucou <?php echo $_SESSION['user_id']; ?> </p>
 
 <?php
 }

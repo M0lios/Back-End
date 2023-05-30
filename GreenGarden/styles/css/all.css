@@ -40,6 +40,15 @@ nav {
 	background-color:white !important;
 }
 
+.new-nav {
+	padding:0 !important;
+	background-color:#76b380 !important;
+}
+
+.new-nav a {
+	color:white !important;
+}
+
 nav .container-fluid
 {
 	border-bottom:4px solid #76b380;

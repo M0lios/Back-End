@@ -33,4 +33,9 @@ endif;
     <link rel="stylesheet" href="styles/css/<?php echo $page; ?>.css" />
     <title>GreenGarden</title>
 </head>
+<?php if($page == "erreur-javascript"): ?>
+<script LANGUAGE="JavaScript">document.location.href="index.php"</script>
+<?php else: ?>
+<noscript><meta http-equiv="refresh" content="0, URL=erreur-javascript.php"></noscript>
+<?php endif; ?>
 <body>

@@ -35,7 +35,8 @@ document.getElementById("e_mail").addEventListener("keyup", function() {
   console.log(e_mail);
   if(texte = file('reponse/e_mail_existe.php?e_mail='+ e_mail))
   {
-  	if(texte == "2")
+    console.log(texte);
+  	if(texte == "2" || texte == "0")
   	{
 		DeleteErrorMsg("e_mail_existe");
   	}
