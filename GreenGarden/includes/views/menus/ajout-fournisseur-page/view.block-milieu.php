@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $product_id = $conn->lastInsertId();
 				
 				//Redirection sur le produit créé
-                header("Location: fournisseur.php?id={$product_id}");
+				echo "<script>window.location.href = 'fournisseur.php?id={$product_id}';</script>";
                 exit();
 
             } catch (PDOException $e) {

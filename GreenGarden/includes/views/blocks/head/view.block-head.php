@@ -29,6 +29,9 @@ endif;
     <link rel="stylesheet" href="styles/css/normalize.css" />
     <link rel="stylesheet" href="styles/css/bootstrap.min.css" />
     <link rel="stylesheet" href="styles/css/bootstrap.css" />
+	<?php if($page == "ajout-ticket"): ?>
+    <link rel="stylesheet" href="styles/css/select.css" />
+	<?php endif; ?>
     <link rel="stylesheet" href="styles/css/all.css" />
     <link rel="stylesheet" href="styles/css/<?php echo $page; ?>.css" />
     <title>GreenGarden</title>

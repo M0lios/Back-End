@@ -44,5 +44,8 @@
 <?php if($page == "panier"): ?>
 <script src="styles/js/up_panier.js"></script>
 <?php endif; ?>
+<?php if($page == "ajout-ticket"): ?>
+<script src="styles/js/select.js"></script>
+<?php endif; ?>
 </body>
 </html>

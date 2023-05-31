@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $product_id = $conn->lastInsertId();
 				
 				//Redirection sur la catégorie créé
-                header("Location: categorie.php?id={$product_id}");
+				echo "<script>window.location.href = 'categorie.php?id={$product_id}';</script>";
                 exit();
 
             } catch (PDOException $e) {

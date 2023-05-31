@@ -46,15 +46,6 @@ try {
 	$conn = new PDO("mysql:host=$host;dbname=$dbname", $user, $password_db);
 	// configuration pour afficher les erreurs pdo
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	
-	
-//on récup l'id du client grâce à l'id user
-$stmt = $conn->prepare("SELECT COUNT(*) AS total FROM t_d_user WHERE Id_User=:userid");
-$stmt->bindValue(':userid', $user_id);
-$stmt->execute();
-$nb_user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-if($nb_user['total'] == 1){
 
 //on récup l'id du client grâce à l'id user
 $stmt = $conn->prepare("SELECT * FROM t_d_client WHERE Id_User=:userid");
@@ -238,13 +229,6 @@ $commande_a = $stmt->fetch(PDO::FETCH_ASSOC);
 	else:
 		echo "<div class='alert alert-warning' role='alert'>Vous n'avez réalisé aucune commande.</div>";
 	endif;
-}
-else{
-    echo "la session user_id est inexistante dans la BDD !";
-	header('Location: connexion.php'); // Redirection vers la page de connexion
-	exit();
-}
-
 
 } catch (PDOException $e) {
 	echo "Connection failed: " . $e->getMessage();

@@ -55,8 +55,16 @@ if (isset($_SESSION['panier'])) {
           <a class="nav-link color-green" href="commande.php">Mes commandes</a>
 		<?php endif; ?>
         </li>
+		<?php if($page == "ticket"): ?>
+        <li class="nav-item active-li">
+          <a class="nav-link color-green" href="#">Mes tickets</a>
+		<?php else: ?>
+        <li class="nav-item">
+          <a class="nav-link color-green" href="ticket.php">Mes tickets</a>
+		<?php endif; ?>
+        </li>
     <?php if (isset($_SESSION['user_type']) && $_SESSION['user_type'] > 1): ?>
-	<?php if($page == "ajout-produit" || $page == "ajout-fournisseur" || $page == "fournisseur" || $page == "ajout-categorie" || $page == "categorie"): ?>
+	<?php if($page == "ajout-produit" || $page == "ajout-fournisseur" || $page == "fournisseur" || $page == "ajout-categorie" || $page == "categorie" || $page == "ajout-ticket"): ?>
 	<li class="nav-item active-li dropdown">
 	<?php else: ?>
 	<li class="nav-item dropdown">
@@ -65,6 +73,16 @@ if (isset($_SESSION['panier'])) {
             Ajout
           </a>
 		<ul class="dropdown-menu background-black border-yellow">
+		<?php if (isset($_SESSION['user_type']) && $_SESSION['user_type'] == 4): ?>
+		<?php if($page == "ajout-ticket"): ?>
+        <li class="active-li">
+          <a class="dropdown-item color-green" href="#">Ticket</a>
+		<?php else: ?>
+        <li>
+          <a class="dropdown-item color-green" href="ajout-ticket.php">Ticket</a>
+		<?php endif; ?>
+        </li>
+		<?php endif; ?>
 		<?php if($page == "ajout-produit"): ?>
         <li class="active-li">
           <a class="dropdown-item color-green" href="#">Produit</a>
@@ -87,6 +105,27 @@ if (isset($_SESSION['panier'])) {
 		<?php else: ?>
         <li>
           <a class="dropdown-item color-green" href="ajout-categorie.php">Catégorie</a>
+		<?php endif; ?>
+        </li>
+	          </ul>
+        </li>
+    <?php endif; ?>
+    <?php if (isset($_SESSION['user_type']) && $_SESSION['user_type'] > 1): ?>
+	<?php if($page == "voir-ticket"): ?>
+	<li class="nav-item active-li dropdown">
+	<?php else: ?>
+	<li class="nav-item dropdown">
+	<?php endif; ?>
+          <a class="nav-link color-green dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Voir
+          </a>
+		<ul class="dropdown-menu background-black border-yellow">
+		<?php if($page == "voir-ticket"): ?>
+        <li class="active-li">
+          <a class="dropdown-item color-green" href="#">Ticket</a>
+		<?php else: ?>
+        <li>
+          <a class="dropdown-item color-green" href="voir-ticket.php">Ticket</a>
 		<?php endif; ?>
         </li>
 	          </ul>

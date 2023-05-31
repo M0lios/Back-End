@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				}
 				
 				//Redirection sur le produit créé
-                header("Location: produit.php?id={$product_id}");
+				echo "<script>window.location.href = 'produit.php?id={$product_id}';</script>";
                 exit();
 
             } catch (PDOException $e) {

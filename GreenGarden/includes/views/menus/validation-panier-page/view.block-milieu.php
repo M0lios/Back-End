@@ -31,14 +31,6 @@ try {
 }
 
 //on récup l'id du client grâce à l'id user
-$stmt = $pdo->prepare("SELECT COUNT(*) AS total FROM t_d_user WHERE Id_User=:userid");
-$stmt->bindValue(':userid', $user_id);
-$stmt->execute();
-$nb_user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-if($nb_user['total'] == 1){
-
-//on récup l'id du client grâce à l'id user
 $stmt = $pdo->prepare("SELECT * FROM t_d_client WHERE Id_User=:userid");
 $stmt->bindValue(':userid', $user_id);
 $stmt->execute();
@@ -189,14 +181,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     echo "<br>Total HT: " . $total . " €<br>";
 
-    unset($_SESSION['panier']);
-    // rediriger vers la page d'acceuil
-    header('Location: commande.php');
+    unset($_SESSION['panier']); // destruction du session panier
+	
+    // rediriger vers la page commande
+	echo "<script>window.location.href = 'commande.php';</script>";
     exit;
-}
-}
-else{
-    echo "la session user_id est inexistante dans la BDD !";
 }
 ?>
 

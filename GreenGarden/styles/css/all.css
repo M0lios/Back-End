@@ -25,7 +25,10 @@ a, a:hover, a:focus{
 	text-decoration:none !important;
 }
 
-
+.select2 {
+	width:100% !important;
+	box-sizing: border-box !important;
+}
 
 /* ################ LOGO HEADER ################ */
 .logo-title {
